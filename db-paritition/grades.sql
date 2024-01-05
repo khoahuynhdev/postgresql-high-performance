@@ -45,3 +45,9 @@ select pg_relation_size(oid), relname from pg_class order by pg_relation_size(oi
 
 -- make sure this value is always 'ON'
 show enable_partition_pruning;
+
+-- Pros
+-- 1. Improves query performance when accessing a single partition
+-- 2. Sequential scan vs Scattered Index scan
+-- 3. Easy bulk loading
+-- 4. Archive old data that are barely accessed into cheap storage
