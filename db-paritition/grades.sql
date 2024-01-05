@@ -51,3 +51,9 @@ show enable_partition_pruning;
 -- 2. Sequential scan vs Scattered Index scan
 -- 3. Easy bulk loading
 -- 4. Archive old data that are barely accessed into cheap storage
+
+-- Cons
+-- 1. Updates that move rows from a partition to another (slow or fail sometimes) eg: move one row from one partition to other partitions
+-- 2. Inefficient queries could accidentally scan all partitions resulting in slower performance
+-- 3. Schema changes can be challenging (DBMS could manage it through)
+
