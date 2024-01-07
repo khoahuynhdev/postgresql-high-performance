@@ -4,11 +4,12 @@
   "description": "",
   "main": "index.mjs",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server.cjs"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "fastify": "^4.25.2",
     "pg": "^8.5.1"
   }
 }
