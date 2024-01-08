@@ -5,6 +5,7 @@
   "main": "index.mjs",
   "scripts": {
     "start": "node server.mjs",
+    "stress": "autocannon -c 50 -d 10 -t 1 --renderStatusCodes http://127.0.0.1:3000/words",
     "up": "sudo docker compose up -d",
     "down": "sudo docker compose down --remove-orphans"
   },
