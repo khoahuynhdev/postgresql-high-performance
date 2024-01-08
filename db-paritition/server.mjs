@@ -20,8 +20,8 @@ fastify.get("/words", async function handler(req, reply) {
     port: 5432,
     database: "searching",
   };
+  const dbClientPostgres = new pg.Client(connectionInfo);
   try {
-    const dbClientPostgres = new pg.Client(connectionInfo);
     await dbClientPostgres.connect();
     const words = generate({
       minLength: 2,
@@ -37,11 +37,13 @@ fastify.get("/words", async function handler(req, reply) {
       data: qRes.rows,
       total: qRes.rowCount,
     });
-    req.log.info({ event: "connection_closing" }, "closing connection");
-    await dbClientPostgres.end();
     req.log.info({ event: "request_done" }, "request done");
   } catch (ex) {
     console.error(`something went wrong ${JSON.stringify(ex.message)}`);
+  } finally {
+    req.log.info({ event: "connection_closing" }, "closing connection");
+    await dbClientPostgres.end();
+    req.log.info({ event: "connection_closed" }, "connection closed");
   }
 });
 
