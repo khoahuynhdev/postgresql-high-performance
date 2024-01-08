@@ -16,13 +16,22 @@ async function run() {
     const dbClientPostgres = new pg.Client(connectionInfo);
     console.log("connecting to postgres...");
     await dbClientPostgres.connect();
-    console.log("dropping database customers...");
-    // await dbClientPostgres.query("drop database customers")
-    // console.log ("creating database customers...")
-    await dbClientPostgres.query("create database eng_words");
-
+    console.log("dropping database eng_words...");
+    await dbClientPostgres.query("drop database eng_words");
+    console.log("creating database searching...");
+    await dbClientPostgres.query("create database searching");
+    const searchingDBClient = new pg.Client({
+      ...connectionInfo,
+      database: "searching",
+    });
+    console.log("creating table eng_words...");
+    await searchingDBClient.connect();
+    await searchingDBClient.query(
+      "create table eng_words(id serial primary key, value varchar(100) NOT NULL)",
+    );
     console.log("closing connection");
     await dbClientPostgres.end();
+    await searchingDBClient.end();
     console.log("done.");
   } catch (ex) {
     console.error(`something went wrong ${JSON.stringify(ex)}`);
