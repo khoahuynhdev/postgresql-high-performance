@@ -5,6 +5,8 @@ services:
     image: postgres:16
     container_name: pgmain
     restart: always
+    ports:
+      - "5432:5432"
     environment:
       POSTGRES_PASSWORD: postgres
       POSTGRES_USER: postgres

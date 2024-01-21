@@ -4,11 +4,22 @@
   "description": "",
   "main": "index.mjs",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server.mjs",
+    "stress": "autocannon -c 50 -d 10 -w 2 --renderStatusCodes http://127.0.0.1:3000/words",
+    "stress:p": "autocannon -c 50 -d 10 -w 2 --renderStatusCodes http://127.0.0.1:3000/pool/words",
+    "stress:more": "autocannon -c 100 -d 10 -t 1 --renderStatusCodes http://127.0.0.1:3000/words",
+    "stress:p-more": "autocannon -c 100 -d 10 -t 1 --renderStatusCodes http://127.0.0.1:3000/pool/words",
+    "up": "sudo docker compose up -d",
+    "down": "sudo docker compose down --remove-orphans"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "fastify": "^4.25.2",
     "pg": "^8.5.1"
+  },
+  "devDependencies": {
+    "autocannon": "^7.14.0",
+    "random-words": "^2.0.0"
   }
 }
