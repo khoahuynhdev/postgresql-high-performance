@@ -15,3 +15,6 @@ CREATE TABLE O_negative PARTITION of donors for VALUES IN ('O- ');
 INSERT INTO donors (id , name , bloodgroup , last_donated , contact_num) VALUES (generate_series(1, 10000) ,'user_' || trunc(random()*100) ,
 (array['A+ group', 'A- group', 'O- group', 'O+ group','AB+ group','AB- group','B+ group','B- group'])[floor(random() * 8 + 1)] , '2022-01-01'::date + trunc(random() * 366 * 1)::int,
 CAST(1000000000 + floor(random() * 9000000000) AS bigint));
+
+-- TODO: Try using pg_partman for partition
+-- https://www.percona.com/blog/postgresql-partitioning-made-easy-using-pg_partman-timebased/
